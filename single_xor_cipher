@@ -1,0 +1,15 @@
+encoded = '1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736'
+
+def findchars(str):
+    filtered = filter(lambda x: 'a'<= x <='z' or 'A' <= x <= 'Z', str)
+    return float(len(filtered))/len(str)
+
+def single_xor(hex_str):
+    decoded_list = []
+    for i in range(256):
+        decoded = [chr(ord(s) ^ i) for s in hex_str.decode('hex')]
+        decoded_list.append([findchars(decoded), ''.join(decoded)])
+    return max(decoded_list, key=lambda y: y[0])
+
+
+print single_xor(encoded)
